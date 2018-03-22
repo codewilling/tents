@@ -1,0 +1,35 @@
+<% include ../partials/header %>
+
+    <div class="container">
+        <header class="jumbotron">
+            <div class="container">
+                <h1>Campgrounds</h1>
+                <p>Curated List of Camping Sites</p>
+                <p>
+                    <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add New Camp Site</a>
+                </p>
+            </div>
+        </header>
+
+        <div class="row text-center">
+            <% campgroundsval.forEach(function(campsite){ %>
+                <div class="col-md-3 col-sm-6">
+                    <div class="img-thumbnail">
+
+                        <img class="img-fluid " src="<%= campsite["image"] %>">
+                        <div class="caption">
+                            <h5>
+                                <%= campsite["name"] %>
+                            </h5>
+                        </div>
+                        <p>
+                            <a href="/campgrounds/<%= campsite._id %>" class="btn btn-primary">More Info</a>
+                        </p>
+
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+    <% include ../partials/footer %>
