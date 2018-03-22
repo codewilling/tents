@@ -42,14 +42,17 @@ router.get("/new", function(req, res){
 router.get("/:id", function(req, res){
     //retrieve the selected item
     let campsite = req.params.id
-    Campground.findById(campsite).populate("comments").exec(function(err, tent){
+    Campground.findById(campsite)
+    .populate("comments")
+    .exec()
+    .then(function(tent,err){
         if(err){
             return console.log(err);
-        } else {
+        }
             console.log(tent)
             //show the show page with the selected item
-            res.render("campgrounds/show", {campgroundsval: tent});
-        }
+            return res.render("campgrounds/show", {campgroundsval: tent});
+        
     });
 });
 
