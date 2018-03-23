@@ -18,6 +18,8 @@
                     <div class="card-text">
                         <p><%= campgroundsval.description %></p>
                     </div>
+                    <div><p><em>Submitted by: <%= campgroundsval.author.username %></em></p></div>
+                    <a class="btn btn-warning" href="/campgrounds/<%=campgroundsval._id%>/edit">Edit</a>
                 </div>
             </div>
             <div class="card bg-light mb-3 ">
