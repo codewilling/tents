@@ -20,6 +20,9 @@
                     </div>
                     <div><p><em>Submitted by: <%= campgroundsval.author.username %></em></p></div>
                     <a class="btn btn-warning" href="/campgrounds/<%=campgroundsval._id%>/edit">Edit</a>
+                    <form id="delete-form" action="/campgrounds/<%=campgroundsval._id%>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
                 </div>
             </div>
             <div class="card bg-light mb-3 ">

@@ -6,5 +6,9 @@
     padding: 20px;
 }
 #user {
-    color: orchid
+    color: orchid;
+}
+
+#delete-form{
+    display: inline;
 }

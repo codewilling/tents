@@ -83,7 +83,14 @@ router.put("/:id", function(req, res){
 });
 
 //DESTROY CAMPGROUND ROUTE
-
+router.delete("/:id", function(req,res){
+    Campground.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/campgrounds/" + req.params.id);
+        }
+            res.redirect("/campgrounds")
+    })
+})
 
 //MIDDLEWARE
 function isLoggedIn(req, res, next){
