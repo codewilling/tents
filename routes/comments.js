@@ -41,6 +41,32 @@ router.post("/", isLoggedIn, function(req, res){
     })
 });
 
+//EDIT COMMENT ROUTE
+router.get("/:comment_id/edit", function(req,res){
+    Comment.findById(req.params.comment_id, function(err, comment){
+        if(err){
+            res.redirect("/campgrounds/" + req.params._id)
+        }else{
+            res.render("comments/edit", {comment: comment, campground_id: req.params.id})
+        }
+    })
+})
+
+//UPDATE COMMENT ROUTE
+router.put("/:comment_id", function(req,res){
+    let newComment = req.body.comment ;
+    let comment = req.params.comment_id ;
+    Comment.findByIdAndUpdate(comment, newComment, function(err, updatedComment){
+        if(err){
+            res.redirect("/campgrounds/" + req.params.id)
+        }else{
+            res.redirect("/campgrounds/" + req.params.id)
+        }
+
+    })
+})
+
+
 function isLoggedIn(req, res, next){
     //passport method .isAuthenticated()
     if(req.isAuthenticated()){
