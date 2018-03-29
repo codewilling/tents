@@ -79,7 +79,7 @@ router.put("/:id", checkCampgroundOwnership,function(req, res){
 });
 
 //DESTROY CAMPGROUND ROUTE
-router.delete("/:id", checkCampgroundOwnership,function(req,res){
+router.delete("/:id", checkCampgroundOwnership, function(req,res){
     Campground.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/campgrounds/" + req.params.id);
@@ -101,18 +101,18 @@ function checkCampgroundOwnership(req, res, next){
     if(req.isAuthenticated()){
         Campground.findById(req.params.id, function(err, tent){
             if(err){
-                res.redirect("back");
+                res.redirect("/campground/" + req.params.id);
             }else{
                 if(tent.author.id.equals(req.user._id)){
                   next();
                 } else {
-                    res.redirect("back");
+                    res.redirect("/campground/" + req.params.id);
                 }
             }
         })
     }else{
         //if not, redirect somewhere
-        res.redirect("back")
+        res.redirect("/campgrounds/" + req.params.id)
     }
 }
 
