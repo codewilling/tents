@@ -66,6 +66,16 @@ router.put("/:comment_id", function(req,res){
     })
 })
 
+//DESTROY COMMENT ROUTE
+router.delete("/:comment_id", function(req,res){
+    Comment.findByIdAndRemove(req.params.comment_id, function(err){
+        if(err){
+            res.redirect("/campgrounds/" + req.params.id)
+        }
+        res.redirect("/campgrounds/" + req.params.id)
+    })
+})
+
 
 function isLoggedIn(req, res, next){
     //passport method .isAuthenticated()
