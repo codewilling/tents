@@ -42,18 +42,18 @@ router.post("/", isLoggedIn, function(req, res){
 });
 
 //EDIT COMMENT ROUTE
-router.get("/:comment_id/edit", function(req,res){
-    Comment.findById(req.params.comment_id, function(err, comment){
+router.get("/:comment_id/edit", checkCommentOwnership, function(req,res){
+    Comment.findById(req.params.comment_id, function(err, foundComment){
         if(err){
-            res.redirect("/campgrounds/" + req.params._id)
+            return res.redirect("/campgrounds/" + req.params.id)
         }else{
-            res.render("comments/edit", {comment: comment, campground_id: req.params.id})
+            return res.render("comments/edit", {comment: foundComment, campground_id: req.params.id})
         }
     })
 })
 
 //UPDATE COMMENT ROUTE
-router.put("/:comment_id", function(req,res){
+router.put("/:comment_id", checkCommentOwnership, function(req,res){
     let newComment = req.body.comment ;
     let comment = req.params.comment_id ;
     Comment.findByIdAndUpdate(comment, newComment, function(err, updatedComment){
@@ -67,7 +67,7 @@ router.put("/:comment_id", function(req,res){
 })
 
 //DESTROY COMMENT ROUTE
-router.delete("/:comment_id", function(req,res){
+router.delete("/:comment_id", checkCommentOwnership, function(req,res){
     Comment.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){
             res.redirect("/campgrounds/" + req.params.id)
@@ -83,6 +83,22 @@ function isLoggedIn(req, res, next){
         return next();
     }
     res.redirect("/login")
+}
+
+function checkCommentOwnership(req, res, next){
+    if(req.isAuthenticated()){
+        Comment.findById(req.params.comment_id, function(err, comment){
+            if(err){
+                res.redirect("/campgrounds/" + req.params.id)
+            }else{
+                if(comment.author.id.equals(req.user._id)){
+                    return next();
+                }else{
+                    res.redirect("/campgrounds/" + req.params.id)
+                }
+            }
+        })
+    }
 }
 
 module.exports = router;
