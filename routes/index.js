@@ -18,10 +18,11 @@ router.post("/register", (req, res)=>{
     //passport method ".register()" will take the password field and create a hash to store in the DB
     User.register(newUser, req.body.password, (err, user) =>{
         if(err){
-            console.log(err);
+            req.flash("error", err)
             return res.render("register")
         }
         passport.authenticate("local")(req, res, ()=>{
+            req.flash('success', "Welcome to Tent's " + user.username + " !")
             res.redirect("/campgrounds");
         })
     })
@@ -43,15 +44,8 @@ router.post("/login", passport.authenticate("local",
 //logout
 router.get("/logout", (req,res) =>{
     req.logout();
-    res.redirect("/");
+    req.flash("success", 'Logged you out!')
+    res.redirect("/campgrounds");
 })
-
-function isLoggedIn(req, res, next){
-    //passport method .isAuthenticated()
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login")
-}
 
 module.exports = router;
