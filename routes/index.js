@@ -18,8 +18,8 @@ router.post("/register", (req, res)=>{
     //passport method ".register()" will take the password field and create a hash to store in the DB
     User.register(newUser, req.body.password, (err, user) =>{
         if(err){
-            req.flash("error", err.message)
-            return res.redirect("register")
+            req.flash("error", err.message);
+            return res.redirect("register");
         }
         passport.authenticate("local")(req, res, ()=>{
             req.flash('success', "Welcome to Tent's " + user.username + " !")

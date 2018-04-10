@@ -52,12 +52,13 @@ router.get("/:id", function(req, res){
     .populate("comments")
     .exec()
     .then(function(tent,err){
-        if(err){
-            return console.log(err);
-        }
+        if(err || !tent){
+            req.flash("error", "Campground not found");
+            return res.redirect("/campgrounds");
+        }else{
             //show the show page with the selected item
             return res.render("campgrounds/show", {campgroundsval: tent});
-        
+        }
     });
 });
 
