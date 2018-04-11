@@ -19,6 +19,7 @@ router.get("/", function(req, res){
 router.post("/", middleware.isLoggedIn,function(req, res){
     //get data from form and add to campgrounds array
     let name = req.body.name;
+    let price = req.body.price;
     let image = req.body.image;
     let description = req.body.description;
     let author = {
@@ -26,7 +27,7 @@ router.post("/", middleware.isLoggedIn,function(req, res){
                     username: req.user.username
                  };
 
-    let newCampground  = {name: name, image: image, description: description, author: author};
+    let newCampground  = {name: name, price: price, image: image, description: description, author: author};
     // create a new campground and save to DB
     Campground.create(newCampground, function(err, newSite){
         if(err){
