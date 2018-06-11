@@ -3,7 +3,7 @@
 }
 
 .container {
-    padding: 20px;
+    padding: 50px;
 }
 #user {
     color: orchid;
@@ -11,4 +11,10 @@
 
 .delete-form{
     display: inline;
+}
+
+/* Google Maps */
+#map {
+    height: 400px;
+    width: 100%;
 }

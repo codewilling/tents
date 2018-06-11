@@ -7,6 +7,7 @@
                 <li class="list-group-item">Info 2</li>
                 <li class="list-group-item">Info 3</li>
             </div>
+            <div id="map"></div>
         </div>
         <div class="col-md-9">
             <div class="card" >
@@ -50,6 +51,36 @@
                 <% }) %>
             </div>
         </div>
-    </div>
-
+    </div> 
+    <!-- <%if(campgroundsval){ %> -->
+    <script>
+        var map;
+        function initMap() {
+          var lat = <%=campgroundsval.lat%>;
+          var lng = <%=campgroundsval.lng%>;
+          var center = {lat: lat, lng: lng };
+         map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 10,
+              center: center,
+              scrollwheel: false
+          });
+          var contentString = `
+            <strong><%= campgroundsval.name %><br />
+            <%= campgroundsval.location %></strong>
+            <p><%= campgroundsval.description %></p>
+          `
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          var marker = new google.maps.Marker({
+              position: center,
+              map: map
+          });
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+        }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp9J_A2Vk-2Xn6S5x52hfwD_6M2TBjdWI&callback=initMap" async defer></script>
+    <!-- <%}%> -->
 <% include ../partials/footer %>

@@ -9,7 +9,7 @@ router.get("/", function(req, res){
 
 //show register form
 router.get("/register", (req, res)=>{
-    res.render("register")
+    res.render("register", {page: 'register'});
 });
 
 //register a user
@@ -18,11 +18,11 @@ router.post("/register", (req, res)=>{
     //passport method ".register()" will take the password field and create a hash to store in the DB
     User.register(newUser, req.body.password, (err, user) =>{
         if(err){
-            req.flash("error", err.message);
-            return res.redirect("register");
+            console.log(err);
+            return res.render("register", {error: err.message});
         }
         passport.authenticate("local")(req, res, ()=>{
-            req.flash('success', "Welcome to Tent's " + user.username + " !")
+            req.flash('success', "You've signed up! Welcome to Tent's " + user.username + " !")
             res.redirect("/campgrounds");
         })
     })
@@ -30,8 +30,8 @@ router.post("/register", (req, res)=>{
 
 //login a user
 router.get("/login", function(req, res){
-    res.render("login")
-})
+    res.render("login", {page: 'login'});
+});
 
 router.post("/login", passport.authenticate("local", 
     {

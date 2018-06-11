@@ -1,4 +1,3 @@
-
 const   express       = require("express"),
         app           = express(),
         bodyParser    = require("body-parser"),
@@ -9,9 +8,7 @@ const   express       = require("express"),
         methodOverride = require("method-override")
         Campground    = require("./models/campground"),
         Comment       = require("./models/comment"),
-        User          = require("./models/user"),
-        port          = 8000,
-        seedDB        = require("./seeds");
+        User          = require("./models/user");
 
 const   commentRoutes    = require("./routes/comments"),
         campgroundRoutes = require("./routes/campgrounds"),
@@ -19,7 +16,8 @@ const   commentRoutes    = require("./routes/comments"),
 
 // seedDB();
 
-mongoose.connect("mongodb://localhost/tents");
+require('dotenv').config();
+mongoose.connect(process.env.DB);
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -43,6 +41,7 @@ app.use(require("express-session")({
 //     duration: 5*60*1000
 // }))
 
+app.locals.moment = require('moment');
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -61,6 +60,6 @@ app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 
 
-app.listen(port, function(){
-    console.log("Open your client to port: " + port);
+app.listen(process.env.port, function(){
+    console.log("Open your client to port: " + process.env.port);
 });
