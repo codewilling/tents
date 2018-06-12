@@ -17,7 +17,7 @@ const   commentRoutes    = require("./routes/comments"),
 // seedDB();
 
 require('dotenv').config();
-mongoose.connect(process.env.DB);
+mongoose.connect(process.env.MONGODB_URI);
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -60,6 +60,6 @@ app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 
 
-app.listen(process.env.port, function(){
-    console.log("Open your client to port: " + process.env.port);
+app.listen(process.env.PORT, function(){
+    console.log("Open your client to port: " + process.env.PORT);
 });
