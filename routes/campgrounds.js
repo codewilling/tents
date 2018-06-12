@@ -32,20 +32,19 @@ router.post("/", middleware.isLoggedIn, function (req, res) {
     let price = req.body.price;
     let image = req.body.image;
     let description = req.body.description;
-    let location = req.body.location;
     let author = {
         id: req.user._id,
         username: req.user.username
     };
-    geocoder.geocode(location, function (err, data) {
+    geocoder.geocode(req.body.location, function (err, data) {
         if (err || !data.length) {
             req.flash('error', 'Invalid address');
             return res.redirect('back');
         }
-        let lat = data.raw.results[0].geometry.location.lat;
-        let lng = data[0].longitude;
-        let location = data[0].formatAddress;
-        let newCampground = { name: name, price: price, image: image, description: description, location: location, author: author };
+        const lat = data[0].latitude;
+        const lng = data[0].longitude;
+        const location = data[0].formatAddress;
+        const newCampground = { name: name, price: price, image: image, description: description, location: location, author: author, lat: lat, lng: lng};
         // create a new campground and save to DB
         Campground.create(newCampground, function (err, newSite) {
             if (err) {
