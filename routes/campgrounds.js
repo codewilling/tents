@@ -20,7 +20,7 @@ router.get("/", function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render("../views/campgrounds/index", { campgroundsval: site, page: 'campgrounds' });
+            res.render("campgrounds/index", { campgroundsval: site, page: 'campgrounds' });
         }
     })
 });

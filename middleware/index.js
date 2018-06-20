@@ -1,3 +1,4 @@
+
 //all the middleware goes here
 let middlewareObj = {}
 
@@ -8,7 +9,7 @@ middlewareObj.checkCampgroundOwnership = function (req, res, next) {
                 req.flash('error', 'Campground not found')
                 res.redirect("/campground/" + req.params.id);
             } else {
-                if (tent.author.id.equals(req.user._id)) {
+                if (tent.author.id.equals(req.user._id) || req.user.isAdmin) {
                     next();
                 } else {
                     req.flash('error', "You don't have permission to do that")
@@ -30,7 +31,7 @@ middlewareObj.checkCommentOwnership = function (req, res, next) {
                 req.flash('error', 'Comment not found')
                 res.redirect("/campgrounds/" + req.params.id)
             } else {
-                if (comment.author.id.equals(req.user._id)) {
+                if (comment.author.id.equals(req.user._id)|| req.user.isAdmin) {
                     return next();
                 } else {
                     req.flash('error', "You don't have permission to do that")

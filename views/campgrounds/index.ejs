@@ -1,8 +1,10 @@
 <% include ../partials/header %>
-
+    <% if(currentUser && currentUser.isAdmin){ %>
+        <h1 id="adminHeader" class="float-center" text-align="center">Admin Mode</h1>
+    <%}%>
         <header class="jumbotron">
             <div class="container">
-                <h1>Campgrounds</h1>
+                <h1><i class="material-icons md-48">landscape</i>Campgrounds</h1>
                 <p>Curated List of Camping Sites</p>
                 <p>
                     <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add New Camp Site</a>

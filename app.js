@@ -12,7 +12,8 @@ const   express       = require("express"),
 
 const   commentRoutes    = require("./routes/comments"),
         campgroundRoutes = require("./routes/campgrounds"),
-        indexRoutes      = require("./routes/index");
+        indexRoutes      = require("./routes/index"),
+        userRoutes       = require("./routes/users");
 
 // seedDB();
 
@@ -58,6 +59,7 @@ app.use(function(req, res, next){
 app.use("/campgrounds/:id/comments", commentRoutes);
 app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
+app.use("/users", userRoutes);
 
 
 app.listen(process.env.PORT, function(){
