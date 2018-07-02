@@ -1,0 +1,45 @@
+<% include ../partials/header %>
+
+    <div class="card mb-3">
+        <img id="userAvatar" class="card-img-top rounded mx-auto d-block" src="<%=user.avatar%>" alt="Card image cap">
+        <div class="card-body">
+            <div>
+                <h1 class="display-4">
+                    <%= user.firstName + " " + user.lastName%>
+                </h1>
+                <p>username: <%= user.username %></p>
+            </div>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a
+                little bit longer.</p>
+            <p class="card-text">
+                <small class="text-muted">Member Since: <%=moment(user.createdAt).format('MMMM YY')%> </small>
+            </p>
+        </div>
+    </div>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#"><%=user.username%>'s Campgrounds</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><%=user.username%>'s Comments</a>
+                </li>
+            </ul>
+        </div>
+        <% campgrounds.forEach((campground)=>{ %>
+            <div class="container ">
+                <div class="card-body border border-primary rounded">
+                    <h5 class="card-title"><%=campground.name%></h5>
+                    <img id="userCampImages"src="<%=campground.image%>" alt="campground thumbnail" class="img-thumbnail">
+                    <p class="card-text"><%=campground.description%></p>
+                    <a href="/campgrounds/<%=campground.id%>" class="btn btn-primary">Visit Campground</a>
+                </div>
+                <div class="card-footer text-muted border border-primary rounded">
+                    Submitted: <%=moment(campgrounds.createdAt).fromNow()%>
+                </div>
+            </div>
+           <% }) %>
+    </div>
+
+    <% include ../partials/footer %>
