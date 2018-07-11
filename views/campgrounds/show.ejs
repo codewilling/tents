@@ -1,12 +1,7 @@
 <% include ../partials/header %>
     <div class="row">
         <div class="col-md-3">
-            <p class="lead">YelpCamp</p>
-            <div class="list-group">
-                <li class="list-group-item active">Info 1</li>
-                <li class="list-group-item">Info 2</li>
-                <li class="list-group-item">Info 3</li>
-            </div>
+            <h5>Location</h5>
             <div id="map"></div>
         </div>
         <div class="col-md-9">
@@ -56,13 +51,12 @@
             </div>
         </div>
     </div> 
-    <!-- <%if(campgroundsval){ %> -->
+    <% if(campgroundsval) {%>
     <script>
-        var map;
-        function initMap() {
-          var lat = <%=campgroundsval.lat%>;
-          var lng = <%=campgroundsval.lng%>;
-          var center = {lat: lat, lng: lng };
+        function initMap(){
+          let lat = <%=campgroundsval.lat%>;
+          let lng = <%=campgroundsval.lng%>;
+          let center = {lat: lat, lng: lng };
          map = new google.maps.Map(document.getElementById('map'), {
               zoom: 10,
               center: center,
@@ -85,6 +79,6 @@
           });
         }
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp9J_A2Vk-2Xn6S5x52hfwD_6M2TBjdWI&callback=initMap" async defer></script>
-    <!-- <%}%> -->
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp9J_A2Vk-2Xn6S5x52hfwD_6M2TBjdWI&callback=initMap" ></script>
+      <% }%>
 <% include ../partials/footer %>

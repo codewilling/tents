@@ -33,13 +33,13 @@ app.use(require("express-session")({
     secret: "Maddie is the most adorable 3 year old",
     resave: false,
     saveUninitialized: false
-}))
+}));
 
-//client-session
-// app.use(require("client-sessions")({
-//     cookieName: "session",
-//     secret: "Maddie is the most adorable 3 year old",
-//     duration: 5*60*1000
+// client-session
+//  app.use(require("client-sessions")({
+//      cookieName: "session",
+//      secret: "Maddie is the most adorable 3 year old",
+//      duration: 5*60*1000
 // }))
 
 app.locals.moment = require('moment');

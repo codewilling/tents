@@ -26,7 +26,7 @@ router.post("/register", (req, res) => {
             email: req.body.email,
             isAdmin: req.body.adminAccessCode
         })
-    if (req.body.adminAccessCode === 'junto214') {
+    if (req.body.adminAccessCode === process.env.ADMIN_CODE) {
         newUser.isAdmin = true;
     }
     else {

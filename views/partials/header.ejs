@@ -36,7 +36,7 @@
                         </li>
                     </ul>
                     <form action="/campgrounds" method="GET" class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Campground Search...">
+                        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Campground Search...">
                         <input class="btn btn-primary-outline my-2 my-sm-0" value="Search" type="submit">
                     </form>
                     <% } else{ %>
@@ -48,10 +48,10 @@
                                 <a class="nav-link" href="/logout">Logout</a>
                             </li>
                         </ul>
-                        <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Search">
-                                <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-                            </form>
+                        <form action="/campgrounds" method="GET" class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" name="search" type="search" placeholder="Campground Search...">
+                            <input class="btn btn-primary-outline my-2 my-sm-0" value="Search" type="submit">
+                        </form>
                 <% } %>
             </div>
     </nav>
