@@ -18,7 +18,9 @@ const   commentRoutes    = require("./routes/comments"),
 // seedDB();
 
 require('dotenv').config();
-mongoose.connect(process.env.MONGODB_URI);
+
+mongoose.connect(`mongodb+srv://heroku_tkz2wwlj:${process.env.MONGO_DB}@cluster-tkz2wwlj.h8gh8.mongodb.net/heroku_tkz2wwlj?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true}).then((result) => console.log('connected to db')).catch(err=>console.log(err));
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -36,11 +38,11 @@ app.use(require("express-session")({
 }));
 
 // client-session
-//  app.use(require("client-sessions")({
-//      cookieName: "session",
-//      secret: "Maddie is the most adorable 3 year old",
-//      duration: 5*60*1000
-// }))
+ app.use(require("client-sessions")({
+     cookieName: "session",
+     secret: "Maddie is the most adorable 3 year old",
+     duration: 5*60*1000
+}))
 
 app.locals.moment = require('moment');
 app.use(passport.initialize());
