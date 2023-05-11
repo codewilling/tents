@@ -19,7 +19,7 @@ const   commentRoutes    = require("./routes/comments"),
 
 require('dotenv').config();
 
-mongoose.connect(`mongodb+srv://heroku_tkz2wwlj:${process.env.MONGO_DB}@cluster-tkz2wwlj.h8gh8.mongodb.net/heroku_tkz2wwlj?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true}).then((result) => console.log('connected to db')).catch(err=>console.log(err));
+mongoose.connect(`mongodb://mongo:sOLsxO3mlx3ur7iJT6n7@containers-us-west-130.railway.app:6455`, {useNewUrlParser: true, useUnifiedTopology: true}).then((result) => console.log('connected to db')).catch(err=>console.log(err));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
