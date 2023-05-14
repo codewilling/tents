@@ -87,6 +87,7 @@
 <script>
         window.onload = function(){
             L.mapquest.key = "iT6TtEbq7lBBjoXDVgWBPrjj1DwQyK3H"
+            L.mapquest.open = true;
           let lat = <%=campgroundsval.lat%>;
           let lng = <%=campgroundsval.lng%>;
           let center = {lat: lat, lng: lng };
@@ -103,19 +104,6 @@
             <%= campgroundsval.location %></strong>
             <p><%= campgroundsval.description %></p>
           `
-
-        //   var infowindow = new google.maps.InfoWindow({
-        //     content: contentString
-        //   });
-
-        //   var marker = new google.maps.Marker({
-        //       position: center,
-        //       map: map
-        //   });
-
-        //   marker.addListener('click', function() {
-        //     infowindow.open(map, marker);
-        //   });
           map.addControl(L.mapquest.control());
 
           L.mapquest.textMarker(center, {
@@ -131,5 +119,4 @@
           }).addTo(map);
         }
 </script>
-<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3ydC718ZuAG9XX1aV4h_7L8mKwD9czlo&callback=initMap" ></script> -->
 <% }%> <% include ../partials/footer %>

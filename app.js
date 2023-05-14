@@ -1,4 +1,5 @@
-const   express       = require("express"),
+const   cookieSession = require('cookie-session'),
+        express       = require("express"),
         app           = express(),
         bodyParser    = require("body-parser"),
         mongoose      = require("mongoose"),
